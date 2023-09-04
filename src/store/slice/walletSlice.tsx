@@ -14,11 +14,11 @@ const walletSlice = createSlice({
       state.dollars += action.payload;
     },
     // покупка за доллоры
-    bayToDollars: (state, action) => {
+    buyToDollars: (state, action) => {
       state.dollars -= action.payload;
     },
     //покупка за коины
-    bayToCoin: (state, action) => {
+    buyToCoin: (state, action) => {
       state.coins -= action.payload;
     },
     // покупка монет за доллары
@@ -33,7 +33,7 @@ const walletSlice = createSlice({
   },
 });
 
-export const { addDollars, buyCoins, bayToDollars, bayToCoin } =
+export const { addDollars, buyCoins, buyToDollars, buyToCoin } =
   walletSlice.actions;
 
 export default walletSlice.reducer;
