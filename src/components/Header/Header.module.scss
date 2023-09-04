@@ -1,0 +1,41 @@
+.header {
+  margin: 0 0 20px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: aquamarine;
+  height: 60px;
+
+  .nav {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+
+    .list {
+      margin: 0 auto;
+      width: 100%;
+
+      justify-content: center;
+      display: flex;
+      padding: 0;
+      list-style-type: none;
+      gap: 40px;
+
+      .item {
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+          color: blue;
+        }
+      }
+    }
+  }
+  .container {
+  }
+}

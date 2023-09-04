@@ -1,0 +1,95 @@
+.card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  // margin: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  transition: box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #e1e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    white-space: nowrap; /* Запрещает перенос текста на новую строку */
+    overflow: hidden; /* Скрывает текст, который не помещается в блок */
+    text-overflow: ellipsis; /* Добавляет многоточие (...) в конец обрезанного текста */
+  }
+
+  .information {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+
+    .quantity,
+    .id {
+      color: #666;
+    }
+  }
+
+  .discountPercentage {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 16px;
+    margin: 0;
+
+    .clickbait {
+      display: flex;
+      align-items: center;
+
+      .base {
+        margin-right: 8px;
+        color: #333;
+        text-decoration: line-through;
+      }
+
+      .discount {
+        color: #f00;
+        font-weight: bold;
+      }
+    }
+
+    .final {
+      font-weight: bold;
+      color: #38a700;
+    }
+  }
+
+  .button {
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .active {
+    background-color: #007bff;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  .disabled {
+    background-color: #464f59;
+    cursor: not-allowed;
+  }
+}
