@@ -5,21 +5,24 @@ import Layout from '@/layouts/layout';
 import Head from 'next/head';
 
 function ProductCards() {
-  const router = useRouter();
-  const id = router.query.id as string | undefined;
-  const products = useSelector((state: IRootState) => state.data.products);
-
   interface Product {
     id: number;
     title: string;
     quantity: number;
     price: number;
     discountPercentage: number;
-    discountedPrice: number;
   }
 
+  interface Props {
+    products: Product[];
+  }
+
+  const router = useRouter();
+  const id = router.query.id as string;
+  const data: Props = useSelector((state: IRootState) => state.data);
+
   // Проверяем наличие карточки по id
-  const product: Product | undefined = products.find(
+  const product = data.products.find(
     (product) => product.id === parseInt(id, 10)
   );
 
