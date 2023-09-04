@@ -1,6 +1,4 @@
-import { removeFromCart } from '@/store/slice/cartSlice';
 import style from './ListProduct.module.scss';
-import { useState } from 'react';
 
 interface Product {
   id: number;
@@ -18,6 +16,7 @@ interface CardProps {
 }
 
 function ListProduct(props: CardProps) {
+  console.log(props.product);
   const handleAddClick = () => {
     props.addQuantity(props.product);
   };

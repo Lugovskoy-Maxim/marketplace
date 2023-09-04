@@ -24,7 +24,6 @@ function Card({ product }: CardProps) {
     const existingItemIndex = productInCart.findIndex(
       (item) => item.id === product.id
     );
-    console.log('index', existingItemIndex);
     if (existingItemIndex == -1) {
       return false;
     } else if (productInCart[existingItemIndex].quantity >= product.quantity) {

@@ -4,7 +4,7 @@ import Layout from '@/layouts/layout';
 import ListProduct from '@/components/ListProduct/ListProduct';
 import { useCallback, useEffect, useState } from 'react';
 import { addToCart, removeFromCart } from '@/store/slice/cartSlice';
-import { buyToCoin, buyToDollars } from '@/store/slice/walletSlice'; // Поправил название экшенов
+import { buyToCoin, buyToDollars } from '@/store/slice/walletSlice';
 
 function Cart() {
   interface Product {
@@ -21,11 +21,11 @@ function Cart() {
 
   const dispatch = useDispatch();
   const data: Props = useSelector((state: IRootState) => state.data);
-  const cart = useSelector((state: IRootState) => state.carts); // Поправил название slice
+  const cart = useSelector((state: IRootState) => state.carts);
   const wallet = useSelector((state: IRootState) => state.wallet);
-  const [disabledBtn, setDisabledBtn] = useState(true); // Поправил опечатку
+  const [disabledBtn, setDisabledBtn] = useState(true);
   const [currency, setCurrency] = useState('dollars');
-  const [totalAmount, setTotalAmount] = useState(0); // Поправил опечатку
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const calculateTotalAmount = useCallback(() => {
     let totalAmount = 0;
@@ -57,14 +57,11 @@ function Cart() {
     totalAmount,
     wallet.coins,
     wallet.dollars,
-  ]); // Добавил зависимости
-
-  console.log(disabledBtn);
+  ]);
 
   function checkQuantity(item: { id: any; quantity: number }) {
-    // Поправил название функции
     const index = data.products.findIndex((product) => product.id === item.id);
-    if (index !== -1 && data.products[index].quantity >= item.quantity) {
+    if (index !== -1 && data.products[index].quantity - 1 >= item.quantity) {
       return false;
     }
     return true;
@@ -89,9 +86,9 @@ function Cart() {
 
   const handlePayment = () => {
     if (currency === 'dollars') {
-      dispatch(buyToDollars(calculateTotalAmount())); // Поправил название экшена
+      dispatch(buyToDollars(calculateTotalAmount()));
     } else if (currency === 'coins') {
-      dispatch(buyToCoin(calculateTotalAmount())); // Поправил название экшена
+      dispatch(buyToCoin(calculateTotalAmount()));
     }
   };
 
@@ -99,7 +96,7 @@ function Cart() {
     <Layout>
       <div className="cart">
         <ul>
-          {cart.items.length === 0 ? ( // Поправил сравнение
+          {cart.items.length === 0 ? (
             <p>Корзина пуста</p>
           ) : (
             cart.items.map((product) => (
@@ -108,7 +105,7 @@ function Cart() {
                 product={product}
                 addQuantity={addQuantity}
                 removeItem={removeItem}
-                chekQuantity={checkQuantity} // Поправил название функции
+                chekQuantity={checkQuantity}
               />
             ))
           )}
@@ -134,7 +131,7 @@ function Cart() {
           onClick={handlePayment}
           className={`payment-button ${
             disabledBtn || totalAmount === 0 ? 'disabled' : 'active'
-          }`} // Поправил сравнение
+          }`}
           disabled={disabledBtn}
         >
           Оплатить (

@@ -22,7 +22,7 @@ function Wallet() {
   };
 
   function swapDollarToCoins() {
-    dispatch(buyCoins(inputDollarsValue));
+    dispatch(buyCoins(inputCoinValue));
   }
 
   return (

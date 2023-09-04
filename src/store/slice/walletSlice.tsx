@@ -25,7 +25,7 @@ const walletSlice = createSlice({
     buyCoins: (state, action) => {
       const amountInDollars = action.payload;
       if (state.dollars >= amountInDollars) {
-        const coinsPerDollar = amountInDollars * 1; //  1 доллар = 1 монета
+        const coinsPerDollar = amountInDollars; //  1 доллар = 1 монета
         state.dollars -= coinsPerDollar;
         state.coins += coinsPerDollar;
       }
