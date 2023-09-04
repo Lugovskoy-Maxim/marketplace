@@ -1,10 +1,8 @@
 @import 'main';
 @import 'cart';
+@import 'wallet';
+@import 'loading';
 
 body {
   margin: 0;
-}
-
-.cart {
-  display: flex;
 }
