@@ -1,8 +1,9 @@
-import Layout from '@/layouts/layout';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { addDollars, buyCoins } from '@/store/slice/walletSlice';
 import { IRootState } from '@/store/store';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import Layout from '@/layouts/layout';
 
 function Wallet() {
   const dispatch = useDispatch();
@@ -14,9 +15,10 @@ function Wallet() {
     setInputDollarsValue(parseFloat(e.currentTarget.value));
   };
 
-  function replenishmentDollarСurrency() {
+  function replenishmentDollarCurrency() {
     dispatch(addDollars(inputDollarsValue));
   }
+
   const handleChangeCoinInput = (e: React.FormEvent<HTMLInputElement>) => {
     setInputCoinValue(parseFloat(e.currentTarget.value));
   };
@@ -27,15 +29,13 @@ function Wallet() {
 
   return (
     <Layout>
-      <div>
+      <div className="wallet">
         <h1>WALLET</h1>
-        <div>
-          <p>Баланс</p>
-          <div>
-            <div>
-              <p>{wallet.dollars} $</p>
-              <p>{wallet.coins} coins</p>
-            </div>
+        <div className="balance-section">
+          <p className="balance-text">Баланс</p>
+          <div className="balance-info">
+            <div className="coin-balance">{wallet.dollars} $</div>
+            <div className="coin-balance">{wallet.coins} coins</div>
           </div>
         </div>
         <input
@@ -44,8 +44,13 @@ function Wallet() {
           placeholder="пополнить dollars"
           value={inputDollarsValue}
           onChange={(e) => handleChangeDollarInput(e)}
+          className="input-dollar"
         ></input>
-        <button type="button" onClick={() => replenishmentDollarСurrency()}>
+        <button
+          type="button"
+          onClick={() => replenishmentDollarCurrency()}
+          className="btn-replenish"
+        >
           Пополнить
         </button>
         <input
@@ -54,8 +59,13 @@ function Wallet() {
           placeholder="обменять dollars на coins"
           value={inputCoinValue}
           onChange={(e) => handleChangeCoinInput(e)}
+          className="input-coin"
         ></input>
-        <button type="button" onClick={() => swapDollarToCoins()}>
+        <button
+          type="button"
+          onClick={() => swapDollarToCoins()}
+          className="btn-swap"
+        >
           Обменять
         </button>
       </div>

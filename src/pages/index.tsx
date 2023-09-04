@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <Layout>
       {data.loading ? (
-        <p>Загрузка...</p>
+        <div className="loading">Loading&#8230;</div>
       ) : (
         <ProductCards productsData={data.products} />
       )}

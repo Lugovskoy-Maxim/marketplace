@@ -34,25 +34,22 @@ function Header() {
           </li>
         </ul>
       </nav>
-      <div>
-        Баланс: {wallet.dollars}$, {wallet.coins} coins
-      </div>
-      <div>
-        Корзина:
-        {carts.items.length === 0 ? (
-          ' нет товаров в корзине'
-        ) : (
-          <div>
-            <p>Общая сумма: {totalAmount} $</p>
-            {/* <ul>
-              {carts.items.map((item, index) => (
-                <li key={index}>
-                  {`Товар ID: ${item.id}, Название: ${item.title}, Количество: ${item.quantity}, цена: ${item.discountedPrice} $`}
-                </li>
-              ))}
-            </ul> */}
-          </div>
-        )}
+      <div className={style.right}>
+        <div className={style.wallet}>
+          <p className={style.title}>Баланс:</p>
+          <p className={style.title}>{wallet.dollars} $</p>
+          <p className={style.title}>{wallet.coins} coins</p>
+        </div>
+        <div className={style.cart}>
+          Корзина:
+          {carts.items.length === 0 ? (
+            <p className={style.count}>пусто</p>
+          ) : (
+            <div>
+              <p className={style.count}>{totalAmount} $</p>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

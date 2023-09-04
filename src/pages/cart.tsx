@@ -3,7 +3,7 @@ import { IRootState } from '../store/store';
 import Layout from '@/layouts/layout';
 import ListProduct from '@/components/ListProduct/ListProduct';
 import { useCallback, useEffect, useState } from 'react';
-import { addToCart, removeFromCart } from '@/store/slice/cartSlice';
+import { addToCart, removeFromCart, clearCart } from '@/store/slice/cartSlice';
 import { buyToCoin, buyToDollars } from '@/store/slice/walletSlice';
 
 function Cart() {
@@ -23,6 +23,7 @@ function Cart() {
   const data: Props = useSelector((state: IRootState) => state.data);
   const cart = useSelector((state: IRootState) => state.carts);
   const wallet = useSelector((state: IRootState) => state.wallet);
+
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [currency, setCurrency] = useState('dollars');
   const [totalAmount, setTotalAmount] = useState(0);
@@ -87,8 +88,10 @@ function Cart() {
   const handlePayment = () => {
     if (currency === 'dollars') {
       dispatch(buyToDollars(calculateTotalAmount()));
+      dispatch(clearCart());
     } else if (currency === 'coins') {
       dispatch(buyToCoin(calculateTotalAmount()));
+      dispatch(clearCart());
     }
   };
 

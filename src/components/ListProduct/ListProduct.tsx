@@ -16,7 +16,6 @@ interface CardProps {
 }
 
 function ListProduct(props: CardProps) {
-  console.log(props.product);
   const handleAddClick = () => {
     props.addQuantity(props.product);
   };
@@ -27,7 +26,6 @@ function ListProduct(props: CardProps) {
 
   return (
     <li className={style.item}>
-      {/* <input type="checkbox"></input> */}
       <div className={style.info}>
         <span className={style.title}>{props.product.title}</span>
         <span className={style.id}>ID: {props.product.id}</span>
