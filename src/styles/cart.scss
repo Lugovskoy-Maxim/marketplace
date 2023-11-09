@@ -7,6 +7,15 @@
   margin: 0 auto;
 }
 
+.cart__emtpy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: 600;
+  margin: 140px auto;
+}
+
 .cart-title {
   font-size: 28px;
   font-weight: bold;

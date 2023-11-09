@@ -112,7 +112,7 @@ function Cart() {
       <div className="cart">
         <ul>
           {cart.items.length === 0 ? (
-            <p>Корзина пуста</p>
+            <p className="cart__emtpy">Корзина пуста</p>
           ) : (
             cart.items.map((product) => (
               <ListProduct
