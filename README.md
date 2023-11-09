@@ -1,18 +1,4 @@
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-Пробная версия маркетплейса.
+## Пробная версия маркетплейса.
 
 - Карточки товаров из FakeAPI https://dummyjson.com/carts.
 
@@ -22,6 +8,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - Все товары можно покупать за любую валюту, но если Coin не хватает для покупки можно пополнить через $, но а так же можно купить и за $.
 
-stack: Next 13.5, Axios, React Query, redux-toolkit, TS.
+Стек: Next 13.5, Axios, React Query, redux-toolkit, TS.
 
 Демо страница [ТУТ_ТЫК](https://lugovskoy-maxim.github.io/test_marketplace/)
