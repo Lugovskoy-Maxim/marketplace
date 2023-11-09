@@ -126,35 +126,36 @@ function Cart() {
             ))
           )}
         </ul>
+        <div className="payment">
+          <div className="currency-selector">
+            <span>Выберите валюту:</span>
+            <button
+              onClick={() => handleCurrencyChange('dollars')}
+              className={currency === 'dollars' ? 'active' : ''}
+            >
+              $
+            </button>
+            <button
+              onClick={() => handleCurrencyChange('coins')}
+              className={currency === 'coins' ? 'active' : ''}
+            >
+              coins
+            </button>
+          </div>
 
-        <div className="currency-selector">
-          <span>Выберите валюту:</span>
           <button
-            onClick={() => handleCurrencyChange('dollars')}
-            className={currency === 'dollars' ? 'active' : ''}
+            onClick={handlePayment}
+            className={`payment-button ${
+              disabledBtn || totalAmount === 0 ? 'disabled' : 'active'
+            }`}
+            disabled={disabledBtn}
           >
-            $
-          </button>
-          <button
-            onClick={() => handleCurrencyChange('coins')}
-            className={currency === 'coins' ? 'active' : ''}
-          >
-            coins
+            Оплатить (
+            {`${cart.items.length === 0 ? 0 : totalAmount}
+          ${currency}`}
+            )
           </button>
         </div>
-
-        <button
-          onClick={handlePayment}
-          className={`payment-button ${
-            disabledBtn || totalAmount === 0 ? 'disabled' : 'active'
-          }`}
-          disabled={disabledBtn}
-        >
-          Оплатить (
-          {`${cart.items.length === 0 ? 0 : totalAmount}
-          ${currency}`}
-          )
-        </button>
       </div>
     </Layout>
   );

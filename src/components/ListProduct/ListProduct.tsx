@@ -1,4 +1,5 @@
-import style from './ListProduct.module.scss';
+import Image from 'next/image';
+import styles from './ListProduct.module.scss';
 
 interface Product {
   id: number;
@@ -30,31 +31,42 @@ function ListProduct(props: CardProps) {
   };
 
   return (
-    <li className={style.item}>
-      <div className={style.info}>
-        <span className={style.title}>{props.product.title}</span>
-        <span className={style.id}>ID: {props.product.id}</span>
-        <span className={style.price}>
-          Цена:
-          {Math.floor(props.product.price - props.product.discountPercentage)}
-        </span>
+    <li className={styles.item}>
+      <Image
+        src={`https://imgholder.ru/200x200/adb9ca/374355&text=${props.product.title}&font=bebas`}
+        alt="Изображение товара"
+        className={styles.image}
+        width="50"
+        height="50"
+      />
+      <div className={styles.info}>
+        <div>
+          <span className={styles.title}>{props.product.title}</span>
+        </div>
+        <div className={styles.info_desc}>
+          <span className={styles.id}>ID: {props.product.id}</span>
+          <span className={styles.price}>
+            Цена:{' '}
+            {Math.floor(props.product.price - props.product.discountPercentage)}
+          </span>
+        </div>
       </div>
-      <div className={style.quantity}>
-        <span className={style.label}>Количество:</span>
+      <div className={styles.quantity}>
+        <span className={styles.label}>Количество:</span>
         <button
-          className={`${style.button} ${
-            props.chekQuantity(props.product) ? style.disabled : style.active
+          className={`${styles.button} ${
+            props.chekQuantity(props.product) ? styles.disabled : styles.active
           }`}
           onClick={handleAddClick}
           disabled={props.chekQuantity(props.product)}
         >
           +
         </button>
-        <span className={style.quantity}>{props.product.quantity}</span>
+        <span className={styles.quantity}>{props.product.quantity}</span>
 
         <button
-          className={`${style.button} ${
-            props.product.quantity <= 0 ? style.disabled : style.active
+          className={`${styles.button} ${
+            props.product.quantity <= 0 ? styles.disabled : styles.active
           }`}
           onClick={handleMinusClick}
           disabled={props.product.quantity <= 0}
@@ -64,7 +76,7 @@ function ListProduct(props: CardProps) {
 
         <button
           type="button"
-          className={`${style.button} ${style.active}`}
+          className={`${styles.button} ${styles.active}`}
           onClick={handleRemoveClick}
         >
           Удалить
