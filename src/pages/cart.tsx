@@ -3,7 +3,12 @@ import { IRootState } from '../store/store';
 import Layout from '@/layouts/layout';
 import ListProduct from '@/components/ListProduct/ListProduct';
 import { useCallback, useEffect, useState } from 'react';
-import { addToCart, removeFromCart, clearCart } from '@/store/slice/cartSlice';
+import {
+  addToCart,
+  removeFromCart,
+  clearCart,
+  minusQuantity,
+} from '@/store/slice/cartSlice';
 import { buyToCoin, buyToDollars } from '@/store/slice/walletSlice';
 
 function Cart() {
@@ -77,6 +82,13 @@ function Cart() {
     return false;
   }
 
+  function minusQuantityItem(item: { id: any; quantity: number }) {
+    if (item.quantity <= 1) {
+      dispatch(removeFromCart(item.id));
+    }
+    dispatch(minusQuantity(item));
+  }
+
   function removeItem(id: number) {
     dispatch(removeFromCart(id));
   }
@@ -109,6 +121,7 @@ function Cart() {
                 addQuantity={addQuantity}
                 removeItem={removeItem}
                 chekQuantity={checkQuantity}
+                minusQuantity={minusQuantityItem}
               />
             ))
           )}

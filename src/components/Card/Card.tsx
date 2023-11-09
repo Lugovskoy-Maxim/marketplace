@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import style from './Card.module.scss';
+import styles from './Card.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/store/slice/cartSlice';
 import { IRootState } from '@/store/store';
+import Image from 'next/image';
 
 interface Product {
   id: number;
@@ -20,7 +21,19 @@ function Card({ product }: CardProps) {
   const dispatch = useDispatch();
   const productInCart = useSelector((state: IRootState) => state.carts.items);
 
-  function chekQuantoty() {
+  function chekQuantityNumber() {
+    const existingItemIndex = productInCart.findIndex(
+      (item) => item.id === product.id
+    );
+    if (existingItemIndex == -1) {
+      return 0;
+    } else if (productInCart[existingItemIndex].quantity > 0) {
+      return productInCart[existingItemIndex].quantity;
+    }
+    return 0;
+  }
+
+  function chekQuantity() {
     const existingItemIndex = productInCart.findIndex(
       (item) => item.id === product.id
     );
@@ -40,44 +53,56 @@ function Card({ product }: CardProps) {
   return (
     <li key={product.id}>
       <div>
-        <div className={style.card}>
-          <Link className={style.link} href={`/product/${product.id}`}>
-            <p className={style.title}>{product.title}</p>
+        <div className={styles.card}>
+          <Image
+            src={`https://imgholder.ru/200x200/adb9ca/374355&text=${product.title}&font=bebas`}
+            alt={`${product.title}`}
+            priority={false}
+            width="200"
+            height="200"
+          />
+          <Link className={styles.link} href={`/product/${product.id}`}>
+            <p className={styles.title}>{product.title}</p>
           </Link>
-          <div className={style.information}>
-            <span className={`${style.quantity} `}>
+          <div className={styles.information}>
+            <span className={`${styles.quantity} `}>
               На складе: {product.quantity}
             </span>
-            <span className={`${style.id} `}>Код товара: {product.id}</span>
+            <span className={`${styles.id} `}>Код товара: {product.id}</span>
           </div>
-          <div className={style.price}>
-            <div className={style.clickbait}>
-              <p className={`${style.price} ${style.base}`}>
+          <div className={styles.price}>
+            <div className={styles.clickbait}>
+              <p className={`${styles.price} ${styles.base}`}>
                 {product.price} $
               </p>
-              <p className={`${style.price} ${style.discount}`}>
+              <p className={`${styles.price} ${styles.discount}`}>
                 - {product.discountPercentage}%
               </p>
             </div>
-            <div className={`${style.discountPercentage}`}>
+            <div className={`${styles.discountPercentage}`}>
               Цена:
-              <p className={`${style.price} ${style.final}`}>
+              <p className={`${styles.price} ${styles.final}`}>
                 {Math.floor(product.price - product.discountPercentage)} $
               </p>
               <button
                 type="button"
-                disabled={chekQuantoty()}
-                className={`${style.button} ${
-                  !chekQuantoty() ? style.active : style.disabled
+                disabled={chekQuantity()}
+                className={`${styles.button} ${
+                  !chekQuantity() ? styles.active : styles.disabled
                 }`}
                 onClick={handleAddToCart}
               >
-                Купить
+                {chekQuantityNumber() == 0 ? 'Купить' : `Купить ещё`}
               </button>
+            </div>
+            <div className={styles.cartQuantity}>
+              {chekQuantityNumber() == 0
+                ? ' '
+                : `в корзине: ${chekQuantityNumber()}`}{' '}
             </div>
           </div>
 
-          <div className={style.btn}></div>
+          <div className={styles.btn}></div>
         </div>
       </div>
     </li>

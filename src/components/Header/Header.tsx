@@ -15,6 +15,7 @@ function Header() {
 
   return (
     <header className={style.header}>
+      <div></div>
       <nav className={style.nav}>
         <ul className={style.list}>
           <li>
@@ -36,12 +37,19 @@ function Header() {
       </nav>
       <div className={style.right}>
         <div className={style.wallet}>
-          <p className={style.title}>Баланс:</p>
+          <p className={style.title}>
+            <Link className={style.item} href="/wallet">
+              Баланс:
+            </Link>
+          </p>
           <p className={style.title}>{wallet.dollars} $</p>
-          <p className={style.title}>{wallet.coins} coins</p>
+          <p className={style.title}>{wallet.coins} c</p>
         </div>
         <div className={style.cart}>
-          Корзина:
+          <Link className={style.item} href="/cart">
+            Корзина:
+          </Link>
+
           {carts.items.length === 0 ? (
             <p className={style.count}>пусто</p>
           ) : (

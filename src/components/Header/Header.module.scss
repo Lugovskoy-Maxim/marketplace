@@ -3,19 +3,25 @@
   color: white;
   padding: 16px;
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
 .right {
   align-items: flex-end;
+  width: max-content;
   display: flex;
+  flex-direction: column;
+  gap: 5px;
   justify-content: flex-end;
-  width: 100%;
+  // width: 100%;
 }
 
 .nav {
+  width: max-content;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,7 +68,8 @@
 
 .wallet {
   display: flex;
-  // flex-direction: column;
+  width: 150px;
+  justify-content: space-between;
   gap: 5px;
   padding: 0 5px;
   margin: 0 5px;
@@ -84,8 +91,9 @@
 }
 
 .cart {
+  width: 150px;
   display: flex;
-  // flex-direction: column;
+  justify-content: space-between;
   gap: 5px;
   padding: 0 5px;
   margin: 0 5px;

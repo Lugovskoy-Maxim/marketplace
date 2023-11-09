@@ -13,6 +13,7 @@ interface CardProps {
   addQuantity: Function;
   removeItem: Function;
   chekQuantity: Function;
+  minusQuantity: Function;
 }
 
 function ListProduct(props: CardProps) {
@@ -22,6 +23,10 @@ function ListProduct(props: CardProps) {
 
   const handleRemoveClick = () => {
     props.removeItem(props.product.id);
+  };
+
+  const handleMinusClick = () => {
+    props.minusQuantity(props.product);
   };
 
   return (
@@ -46,6 +51,17 @@ function ListProduct(props: CardProps) {
           +
         </button>
         <span className={style.quantity}>{props.product.quantity}</span>
+
+        <button
+          className={`${style.button} ${
+            props.product.quantity <= 0 ? style.disabled : style.active
+          }`}
+          onClick={handleMinusClick}
+          disabled={props.product.quantity <= 0}
+        >
+          -
+        </button>
+
         <button
           type="button"
           className={`${style.button} ${style.active}`}

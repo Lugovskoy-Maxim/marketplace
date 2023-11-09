@@ -40,8 +40,31 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = [];
     },
+    minusQuantity: (state, action) => {
+      const findIdItem = action.payload;
+
+      const searchItem = state.items.findIndex(
+        (item) => item.id === findIdItem.id
+      );
+
+      // Проверка на отрицательное значение searchItem и существование элемента, без проверки при значении количества 1 выскочит ошибка (возможно связано с строгим режимом)
+      if (
+        searchItem !== -1 &&
+        state.items[searchItem] &&
+        state.items[searchItem].quantity !== undefined
+      ) {
+        if (state.items[searchItem].quantity === 1) {
+          removeFromCart(findIdItem.id);
+        } else {
+          state.items[searchItem].quantity -= 1;
+        }
+      } else {
+        return;
+      }
+    },
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, minusQuantity } =
+  cartSlice.actions;
 export default cartSlice.reducer;
