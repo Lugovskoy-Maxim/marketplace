@@ -13,7 +13,7 @@ interface CardProps {
   product: Product;
   addQuantity: Function;
   removeItem: Function;
-  chekQuantity: Function;
+  checkQuantity: Function;
   minusQuantity: Function;
 }
 
@@ -55,10 +55,10 @@ function ListProduct(props: CardProps) {
         <span className={styles.label}>Количество:</span>
         <button
           className={`${styles.button} ${
-            props.chekQuantity(props.product) ? styles.disabled : styles.active
+            props.checkQuantity(props.product) ? styles.disabled : styles.active
           }`}
           onClick={handleAddClick}
-          disabled={props.chekQuantity(props.product)}
+          disabled={props.checkQuantity(props.product)}
         >
           +
         </button>

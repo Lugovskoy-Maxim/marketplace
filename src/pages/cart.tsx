@@ -18,6 +18,7 @@ function Cart() {
     quantity: number;
     price: number;
     discountPercentage: number;
+    thumbnail: string;
   }
 
   interface Props {
@@ -112,7 +113,7 @@ function Cart() {
       <div className="cart">
         <ul>
           {cart.items.length === 0 ? (
-            <p className="cart__emtpy">Корзина пуста</p>
+            <p className="cart__empty">Корзина пуста</p>
           ) : (
             cart.items.map((product) => (
               <ListProduct
@@ -120,7 +121,7 @@ function Cart() {
                 product={product}
                 addQuantity={addQuantity}
                 removeItem={removeItem}
-                chekQuantity={checkQuantity}
+                checkQuantity={checkQuantity}
                 minusQuantity={minusQuantityItem}
               />
             ))

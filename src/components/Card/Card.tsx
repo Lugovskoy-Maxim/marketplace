@@ -21,7 +21,7 @@ function Card({ product }: CardProps) {
   const dispatch = useDispatch();
   const productInCart = useSelector((state: IRootState) => state.carts.items);
 
-  function chekQuantityNumber() {
+  function checkQuantityNumber() {
     const existingItemIndex = productInCart.findIndex(
       (item) => item.id === product.id
     );
@@ -33,7 +33,7 @@ function Card({ product }: CardProps) {
     return 0;
   }
 
-  function chekQuantity() {
+  function checkQuantity() {
     const existingItemIndex = productInCart.findIndex(
       (item) => item.id === product.id
     );
@@ -86,19 +86,19 @@ function Card({ product }: CardProps) {
               </p>
               <button
                 type="button"
-                disabled={chekQuantity()}
+                disabled={checkQuantity()}
                 className={`${styles.button} ${
-                  !chekQuantity() ? styles.active : styles.disabled
+                  !checkQuantity() ? styles.active : styles.disabled
                 }`}
                 onClick={handleAddToCart}
               >
-                {chekQuantityNumber() == 0 ? 'Купить' : `Купить ещё`}
+                {checkQuantityNumber() == 0 ? 'Купить' : `Купить ещё`}
               </button>
             </div>
             <div className={styles.cartQuantity}>
-              {chekQuantityNumber() == 0
+              {checkQuantityNumber() == 0
                 ? ' '
-                : `в корзине: ${chekQuantityNumber()}`}{' '}
+                : `в корзине: ${checkQuantityNumber()}`}{' '}
             </div>
           </div>
 
