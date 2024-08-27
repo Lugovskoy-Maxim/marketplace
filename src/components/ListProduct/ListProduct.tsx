@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import styles from './ListProduct.module.scss';
+import Image from "next/image";
+import styles from "./ListProduct.module.scss";
 
 interface Product {
   id: number;
@@ -7,7 +7,7 @@ interface Product {
   quantity: number;
   price: number;
   discountPercentage: number;
-  thumbnail: string;
+  thumbnail?: string;
 }
 
 interface CardProps {
@@ -33,13 +33,24 @@ function ListProduct(props: CardProps) {
 
   return (
     <li className={styles.item}>
-      <Image
-        src={props.product.thumbnail}
-        alt="Изображение товара"
-        className={styles.image}
-        width="50"
-        height="50"
-      />
+      {props.product.thumbnail ? (
+        <Image
+          src={props.product.thumbnail}
+          alt="Изображение товара"
+          className={styles.image}
+          width="50"
+          height="50"
+        />
+      ) : (
+        <Image
+          src={`${`https://imgholder.ru/200x200/adb9ca/374355&text=${props.product.title}&font=bebas`}`}
+          alt="Изображение товара"
+          className={styles.image}
+          width="50"
+          height="50"
+        />
+      )}
+
       <div className={styles.info}>
         <div>
           <span className={styles.title}>{props.product.title}</span>
@@ -47,7 +58,7 @@ function ListProduct(props: CardProps) {
         <div className={styles.info_desc}>
           <span className={styles.id}>ID: {props.product.id}</span>
           <span className={styles.price}>
-            Цена:{' '}
+            Цена:{" "}
             {Math.floor(props.product.price - props.product.discountPercentage)}
           </span>
         </div>
