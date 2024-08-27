@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import styles from './Card.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '@/store/slice/cartSlice';
-import { IRootState } from '@/store/store';
-import Image from 'next/image';
+import Link from "next/link";
+import styles from "./Card.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, minusQuantity, removeFromCart } from "@/store/slice/cartSlice";
+import { IRootState } from "@/store/store";
+import Image from "next/image";
 
 interface Product {
   id: number;
@@ -11,6 +11,7 @@ interface Product {
   quantity: number;
   price: number;
   discountPercentage: number;
+  thumbnail: string;
 }
 
 interface CardProps {
@@ -21,7 +22,8 @@ function Card({ product }: CardProps) {
   const dispatch = useDispatch();
   const productInCart = useSelector((state: IRootState) => state.carts.items);
 
-  function chekQuantityNumber() {
+
+  function checkQuantityNumber() {
     const existingItemIndex = productInCart.findIndex(
       (item) => item.id === product.id
     );
@@ -33,7 +35,7 @@ function Card({ product }: CardProps) {
     return 0;
   }
 
-  function chekQuantity() {
+  function checkQuantity() {
     const existingItemIndex = productInCart.findIndex(
       (item) => item.id === product.id
     );
@@ -45,17 +47,30 @@ function Card({ product }: CardProps) {
     return false;
   }
 
-  const handleAddToCart = () => {
+  const handleAddItemCart = () => {
     // функция добавления в корзину
     dispatch(addToCart(product));
   };
+
+  const handleRemovingItemCart = () => {
+    // функция добавления в корзину
+    dispatch(minusQuantity(product));
+  };
+
+  function minusQuantityItem() {
+    if (checkQuantityNumber() <= 1) {
+      dispatch(removeFromCart(product.id));
+    }
+    dispatch(minusQuantity(product));
+  }
+
 
   return (
     <li key={product.id}>
       <div>
         <div className={styles.card}>
           <Image
-            src={`https://imgholder.ru/200x200/adb9ca/374355&text=${product.title}&font=bebas`}
+            src={product.thumbnail}
             alt={`${product.title}`}
             priority={false}
             width="200"
@@ -66,9 +81,9 @@ function Card({ product }: CardProps) {
           </Link>
           <div className={styles.information}>
             <span className={`${styles.quantity} `}>
-              На складе: {product.quantity}
+              количество: {product.quantity}
             </span>
-            <span className={`${styles.id} `}>Код товара: {product.id}</span>
+            <span className={`${styles.id} `}>код товара: {product.id}</span>
           </div>
           <div className={styles.price}>
             <div className={styles.clickbait}>
@@ -76,30 +91,60 @@ function Card({ product }: CardProps) {
                 {product.price} $
               </p>
               <p className={`${styles.price} ${styles.discount}`}>
-                - {product.discountPercentage}%
+                -{product.discountPercentage}%
               </p>
             </div>
             <div className={`${styles.discountPercentage}`}>
-              Цена:
+              {/* Цена: */}
               <p className={`${styles.price} ${styles.final}`}>
-                {Math.floor(product.price - product.discountPercentage)} $
+                {Math.floor(product.price - (product.price/100 * product.discountPercentage))} $
               </p>
-              <button
-                type="button"
-                disabled={chekQuantity()}
-                className={`${styles.button} ${
-                  !chekQuantity() ? styles.active : styles.disabled
-                }`}
-                onClick={handleAddToCart}
-              >
-                {chekQuantityNumber() == 0 ? 'Купить' : `Купить ещё`}
-              </button>
+
+              {/* Если 0 то купить если 1 и больше то добавляется возможность добавить или удалить */}
+              <div>
+                {checkQuantityNumber() == 0 ? (
+                  <button
+                    type="button"
+                    disabled={checkQuantity()}
+                    className={`${styles.button} ${
+                      !checkQuantity() ? styles.active : styles.disabled
+                    }`}
+                    onClick={handleAddItemCart}
+                  >
+                    {checkQuantityNumber() == 0 ? "Купить" : `Купить ещё`}
+                  </button>
+                ) : (
+                  <div className={styles.count_buttons}>
+                    <button
+                    type="button"
+                    disabled={checkQuantityNumber() == 0}
+                    className={` ${
+                      checkQuantityNumber() == 0 ? styles.disabled : styles.active
+                    }`}
+                    onClick={minusQuantityItem}
+                  >
+                    {'-'}
+                  </button>
+                    <p>{checkQuantityNumber()}</p>
+                    <button
+                    type="button"
+                    disabled={checkQuantity()}
+                    className={` ${
+                      !checkQuantity() ? styles.active : styles.disabled
+                    }`}
+                    onClick={handleAddItemCart}
+                  >
+                    {'+'}
+                  </button>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className={styles.cartQuantity}>
-              {chekQuantityNumber() == 0
-                ? ' '
-                : `в корзине: ${chekQuantityNumber()}`}{' '}
-            </div>
+            {/* <div className={styles.cartQuantity}>
+              {checkQuantityNumber() == 0
+                ? " "
+                : `в корзине: ${checkQuantityNumber()}`}{" "}
+            </div> */}
           </div>
 
           <div className={styles.btn}></div>

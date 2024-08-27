@@ -3,7 +3,7 @@
   padding: 16px;
   margin: 0;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   transition: box-shadow 0.2s ease-in-out;
   max-width: 200px;
@@ -30,7 +30,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
-    font-size: 14px;
+    font-size: 12px;
 
     .quantity,
     .id {
@@ -42,6 +42,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .price {
@@ -50,35 +51,90 @@
     align-items: flex-start;
     font-size: 16px;
     margin: 0;
+    
 
     .clickbait {
+      position: relative;
       display: flex;
       align-items: center;
+
 
       .base {
         margin-right: 8px;
         color: #333;
         text-decoration: line-through;
+        color: #afafaf;
+        font-size: small;
       }
 
       .discount {
-        color: #f00;
-        font-weight: bold;
+        justify-content: center;
+        background: #f44;  
+        font-size: 12px;
+        line-height: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #fff;
+        padding: .8px 4px 1.3px 4px;
+        border-radius: 6px;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
 
     .final {
-      font-weight: bold;
-      color: #38a700;
+      color: #a73afd;
+      // font-weight: bold;
+      // color: #38a700;
+      font-size: 22px;
+      line-height: 22px;
+      font-weight: 700;
+      margin-right: 4px;
     }
   }
 
   .button {
     color: #fff;
     border: none;
-    padding: 8px 16px;
+    // padding: 8px 16px;
     border-radius: 4px;
     transition: background-color 0.2s ease-in-out;
+    width: 75px;
+    height: 32px;
+  }
+
+  .count_buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #000000;
+    // color: #afafaf;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+    width: 75px;
+    height: 32px;
+    gap: 5px;
+
+    button {
+      max-height: 32px;
+      border-radius: 4px;
+      box-shadow: none;
+      font-size: 18px;
+      font-weight: 400;
+      overflow: hidden;
+      padding: 0;
+      line-height: 1.5;
+      outline: none;
+      height: 100%;
+      width: 30px;
+      border: none;
+      background: rgba(0, 0, 0, 0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .active {
