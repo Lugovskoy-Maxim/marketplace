@@ -1,15 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../store/store';
-import Layout from '@/layouts/layout';
-import ListProduct from '@/components/ListProduct/ListProduct';
-import { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "../store/store";
+import Layout from "@/layouts/layout";
+import ListProduct from "@/components/ListProduct/ListProduct";
+import { useCallback, useEffect, useState } from "react";
 import {
   addToCart,
   removeFromCart,
   clearCart,
   minusQuantity,
-} from '@/store/slice/cartSlice';
-import { buyToCoin, buyToDollars } from '@/store/slice/walletSlice';
+} from "@/store/slice/cartSlice";
+import { buyToCoin, buyToDollars } from "@/store/slice/walletSlice";
 
 function Cart() {
   interface Product {
@@ -31,7 +31,7 @@ function Cart() {
   const wallet = useSelector((state: IRootState) => state.wallet);
 
   const [disabledBtn, setDisabledBtn] = useState(true);
-  const [currency, setCurrency] = useState('dollars');
+  const [currency, setCurrency] = useState("dollars");
   const [totalAmount, setTotalAmount] = useState(0);
 
   const calculateTotalAmount = useCallback(() => {
@@ -50,9 +50,9 @@ function Cart() {
 
   useEffect(() => {
     setTotalAmount(calculateTotalAmount());
-    if (currency === 'dollars' && wallet.dollars >= totalAmount) {
+    if (currency === "dollars" && wallet.dollars >= totalAmount) {
       setDisabledBtn(false);
-    } else if (currency === 'coins' && wallet.coins >= totalAmount) {
+    } else if (currency === "coins" && wallet.coins >= totalAmount) {
       setDisabledBtn(false);
     } else {
       setDisabledBtn(true);
@@ -99,10 +99,10 @@ function Cart() {
   };
 
   const handlePayment = () => {
-    if (currency === 'dollars') {
+    if (currency === "dollars") {
       dispatch(buyToDollars(calculateTotalAmount()));
       dispatch(clearCart());
-    } else if (currency === 'coins') {
+    } else if (currency === "coins") {
       dispatch(buyToCoin(calculateTotalAmount()));
       dispatch(clearCart());
     }
@@ -131,14 +131,14 @@ function Cart() {
           <div className="currency-selector">
             <span>Выберите валюту:</span>
             <button
-              onClick={() => handleCurrencyChange('dollars')}
-              className={currency === 'dollars' ? 'active' : ''}
+              onClick={() => handleCurrencyChange("dollars")}
+              className={currency === "dollars" ? "active" : ""}
             >
               $
             </button>
             <button
-              onClick={() => handleCurrencyChange('coins')}
-              className={currency === 'coins' ? 'active' : ''}
+              onClick={() => handleCurrencyChange("coins")}
+              className={currency === "coins" ? "active" : ""}
             >
               coins
             </button>
@@ -147,7 +147,7 @@ function Cart() {
           <button
             onClick={handlePayment}
             className={`payment-button ${
-              disabledBtn || totalAmount === 0 ? 'disabled' : 'active'
+              disabledBtn || totalAmount === 0 ? "disabled" : "active"
             }`}
             disabled={disabledBtn}
           >

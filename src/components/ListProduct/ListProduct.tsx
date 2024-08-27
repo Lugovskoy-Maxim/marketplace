@@ -7,6 +7,7 @@ interface Product {
   quantity: number;
   price: number;
   discountPercentage: number;
+  thumbnail: string;
 }
 
 interface CardProps {
@@ -33,7 +34,7 @@ function ListProduct(props: CardProps) {
   return (
     <li className={styles.item}>
       <Image
-        src={`https://imgholder.ru/200x200/adb9ca/374355&text=${props.product.title}&font=bebas`}
+        src={props.product.thumbnail}
         alt="Изображение товара"
         className={styles.image}
         width="50"

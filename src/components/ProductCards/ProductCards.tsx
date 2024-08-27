@@ -8,6 +8,7 @@ interface Product {
   quantity: number;
   price: number;
   discountPercentage: number;
+  thumbnail: string;
 }
 
 interface ProductCardsProps {
