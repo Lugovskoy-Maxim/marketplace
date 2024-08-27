@@ -20,17 +20,17 @@ function Header() {
         <ul className={style.list}>
           <li>
             <Link className={style.item} href="/">
-              Products
+              Товары
             </Link>
           </li>
           <li>
             <Link className={style.item} href="/wallet/">
-              Wallet
+              Кошелёк
             </Link>
           </li>
           <li>
             <Link className={style.item} href="/cart/">
-              Cart
+              Корзина
             </Link>
           </li>
         </ul>
