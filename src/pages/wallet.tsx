@@ -1,73 +1,99 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addDollars, buyCoins } from '@/store/slice/walletSlice';
-import { IRootState } from '@/store/store';
-import { useState } from 'react';
-import Layout from '@/layouts/layout';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addDollars, buyCoins } from "@/store/slice/walletSlice";
+import { IRootState } from "@/store/store";
+import Layout from "@/layouts/layout";
+import Head from "next/head";
+import style from "../styles/wallet.module.scss";
 
 function Wallet() {
   const dispatch = useDispatch();
   const wallet = useSelector((state: IRootState) => state.wallet);
-  const [inputDollarsValue, setInputDollarsValue] = useState(0);
-  const [inputCoinValue, setInputCoinValue] = useState(0);
+  const [inputDollarsValue, setInputDollarsValue] = useState<number | ''>('');
+  const [inputCoinValue, setInputCoinValue] = useState<number | ''>('');
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const handleChangeDollarInput = (e: React.FormEvent<HTMLInputElement>) => {
-    setInputDollarsValue(parseFloat(e.currentTarget.value));
+  const handleChangeDollarInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputDollarsValue(parseFloat(e.target.value) || '');
   };
 
-  function replenishmentDollarCurrency() {
-    dispatch(addDollars(inputDollarsValue));
-  }
-
-  const handleChangeCoinInput = (e: React.FormEvent<HTMLInputElement>) => {
-    setInputCoinValue(parseFloat(e.currentTarget.value));
+  const handleChangeCoinInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputCoinValue(parseFloat(e.target.value) || '');
   };
 
-  function swapDollarToCoins() {
-    dispatch(buyCoins(inputCoinValue));
-  }
+  const handleReplenish = () => {
+    if (typeof inputDollarsValue === 'number' && inputDollarsValue > 0) {
+      dispatch(addDollars(inputDollarsValue));
+      setSuccessMessage("Кошелёк пополнен!");
+      setError(null);
+      setInputDollarsValue(''); // Очистить поле ввода
+    } else {
+      setError("Введите корректное значение долларов.");
+    }
+  };
+
+  const handleSwap = () => {
+    if (typeof inputCoinValue === 'number' && inputCoinValue > 0) {
+      if (wallet.dollars >= inputCoinValue) {
+        dispatch(buyCoins(inputCoinValue));
+        setSuccessMessage("Обмен успешно выполнен!");
+        setError(null);
+        setInputCoinValue(''); // Очистить поле ввода
+      } else {
+        setError("Недостаточно денег для обмена.");
+      }
+    } else {
+      setError("Введите корректное значение монет.");
+    }
+  };
 
   return (
     <Layout>
-      <div className="wallet">
-        <h1>WALLET</h1>
-        <div className="balance-section">
-          <p className="balance-text">Баланс</p>
-          <div className="balance-info">
-            <div className="coin-balance">{wallet.dollars} $</div>
-            <div className="coin-balance">{wallet.coins} coins</div>
+      <Head>
+        <title>Кошелёк</title>
+      </Head>
+      <div className={style.wallet}>
+        {/* <h1>Кошелёк</h1> */}
+        <div className={style.balanceSection}>
+          <p className={style.balanceText}>Баланс</p>
+          <div className={style.balanceInfo}>
+            <div className={style.coinBalance}>{wallet.dollars} $</div>
+            <div className={style.coinBalance}>{wallet.coins} coins</div>
           </div>
         </div>
         <input
-          type="text"
-          min="1"
-          placeholder="пополнить dollars"
+          type="number"
+          min="0"
+          placeholder="Пополнить dollars"
           value={inputDollarsValue}
-          onChange={(e) => handleChangeDollarInput(e)}
-          className="input-dollar"
-        ></input>
+          onChange={handleChangeDollarInput}
+          className={style.inputDollar}
+        />
         <button
           type="button"
-          onClick={() => replenishmentDollarCurrency()}
-          className="btn-replenish"
+          onClick={handleReplenish}
+          className={style.btnReplenish}
         >
           Пополнить
         </button>
         <input
-          type="text"
-          min="1"
-          placeholder="обменять dollars на coins"
+          type="number"
+          min="0"
+          placeholder="Обменять dollars на coins"
           value={inputCoinValue}
-          onChange={(e) => handleChangeCoinInput(e)}
-          className="input-coin"
-        ></input>
+          onChange={handleChangeCoinInput}
+          className={style.inputCoin}
+        />
         <button
           type="button"
-          onClick={() => swapDollarToCoins()}
-          className="btn-swap"
+          onClick={handleSwap}
+          className={style.btnSwap}
         >
           Обменять
         </button>
+        {error && <p className={style.error}>{error}</p>}
+        {successMessage && <p className={style.success}>{successMessage}</p>}
       </div>
     </Layout>
   );

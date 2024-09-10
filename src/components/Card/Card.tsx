@@ -69,6 +69,7 @@ function Card({ product }: CardProps) {
     <li key={product.id}>
       <div>
         <div className={styles.card}>
+        <Link className={styles.link} href={`/product/${product.id}`}>
           <Image
             src={product.thumbnail}
             alt={`${product.title}`}
@@ -76,6 +77,7 @@ function Card({ product }: CardProps) {
             width="200"
             height="200"
           />
+          </Link>
           <Link className={styles.link} href={`/product/${product.id}`}>
             <p className={styles.title}>{product.title}</p>
           </Link>

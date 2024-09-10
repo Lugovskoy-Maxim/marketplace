@@ -10,6 +10,7 @@ import {
   minusQuantity,
 } from "@/store/slice/cartSlice";
 import { buyToCoin, buyToDollars } from "@/store/slice/walletSlice";
+import Head from "next/head";
 
 function Cart() {
   interface Product {
@@ -110,6 +111,9 @@ function Cart() {
 
   return (
     <Layout>
+      <Head>
+          <title>Корзина</title>
+        </Head>
       <div className="cart">
         <ul>
           {cart.items.length === 0 ? (

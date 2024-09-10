@@ -14,11 +14,15 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
+  & a {
+    text-decoration: none;
+  }
+
   .title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 8px;
-    text-decoration: none;
+    
     color: #333;
     cursor: pointer;
     white-space: nowrap; /* Запрещает перенос текста на новую строку */
@@ -51,13 +55,11 @@
     align-items: flex-start;
     font-size: 16px;
     margin: 0;
-    
 
     .clickbait {
       position: relative;
       display: flex;
       align-items: center;
-
 
       .base {
         margin-right: 8px;
@@ -69,13 +71,13 @@
 
       .discount {
         justify-content: center;
-        background: #f44;  
+        background: #f44;
         font-size: 12px;
         line-height: 14px;
         font-weight: 600;
         text-transform: uppercase;
         color: #fff;
-        padding: .8px 4px 1.3px 4px;
+        padding: 0.8px 4px 1.3px 4px;
         border-radius: 6px;
         max-width: 100%;
         text-overflow: ellipsis;
@@ -85,7 +87,7 @@
     }
 
     .final {
-      color: #a73afd;
+      color: #8246af;
       // font-weight: bold;
       // color: #38a700;
       font-size: 22px;
@@ -99,19 +101,26 @@
     color: #fff;
     border: none;
     // padding: 8px 16px;
+    font-weight: 600;
     border-radius: 4px;
     transition: background-color 0.2s ease-in-out;
+    font-size: 12px;
+    overflow: hidden;
+    padding: 0;
+    line-height: 1.5;
     width: 75px;
-    height: 32px;
+    height: 34px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .count_buttons{
+  .count_buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: #000000;
+    border: 1px solid #afafaf;
+    overflow: hidden;
     // color: #afafaf;
-    border-radius: 4px;
+    border-radius: 5px;
     transition: background-color 0.2s ease-in-out;
     width: 75px;
     height: 32px;
@@ -135,14 +144,18 @@
       justify-content: center;
       align-items: center;
     }
+    
+    p {
+      margin: 0;
+    }
   }
 
   .active {
-    background-color: #1c1f24;
+    background-color: #9031d8bd;
     cursor: pointer;
 
     &:hover {
-      background-color: #5c6875;
+      background-color: #a83afdb9;
     }
   }
 
