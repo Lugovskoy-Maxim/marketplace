@@ -1,5 +1,5 @@
 # Пробная версия маркетплейса
-Демо страница [ТУТ_ТЫК](https://lugovskoy-maxim.github.io/test_marketplace/)
+Демо страница [ТУТ_ТЫК](https://lugovskoy-maxim.github.io/marketplace/)
 
 ## Описание
 
